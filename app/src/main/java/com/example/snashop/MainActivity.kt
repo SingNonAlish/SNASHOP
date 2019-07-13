@@ -12,7 +12,9 @@ class MainActivity : AppCompatActivity() {
 
         bottom_nav.setOnNavigationItemSelectedListener {
             when(it.itemId){
-            R.id.home -> CreateFragmentHome()
+            R.id.home -> {
+                CreateTabPage()
+            }
             R.id.product-> CreateFragmentProduct()
             R.id.info-> CreateFragmentInfo()
             R.id.action_settings -> CreateFragmentSettings()
@@ -20,6 +22,16 @@ class MainActivity : AppCompatActivity() {
         }
             true
         }
+    }
+
+    fun CreateTabPage(){
+        toolBar.setTitle("xxx")
+        setSupportActionBar(toolBar)
+
+        val fragmentAdapter = MyPageAdapter(supportFragmentManager)
+        viewPager.adapter = fragmentAdapter
+
+        tabLayout.setupWithViewPager(viewPager)
     }
 
     fun CreateFragmentHome(){
@@ -36,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
-
     fun CreateFragmentInfo(){
         val transaction = supportFragmentManager.beginTransaction()
         val fragment = InfoFragment()
@@ -44,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
-
     fun CreateFragmentSettings(){
         val transaction = supportFragmentManager.beginTransaction()
         val fragment = SettingsFragment()
@@ -52,7 +62,6 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
-
     fun CreateFragmentUser(){
         val transaction = supportFragmentManager.beginTransaction()
         val fragment = UserFragment()
